@@ -32,6 +32,8 @@ def mag2flux(mag, wavelength, zero_point=-48.6):
         
     flux_den = 10**((mag - zero_point)/-2.5)
     flux = flux_den*(c/wavelength)
+    flux = flux.value 
+    flux = flux*(u.erg/((u.s**1)*(u.cm**2)))
     return flux
 
 def flux2mag(flux, wavelength, zero_point=-48.6):
@@ -54,6 +56,7 @@ def flux2mag(flux, wavelength, zero_point=-48.6):
         
     fluxden = flux/(c.value/wavelength)
     mag = (-2.5*(np.log10(fluxden))) + zero_point
+    mag = mag.value
     return mag
 
 def flux2lum(flux, z):
